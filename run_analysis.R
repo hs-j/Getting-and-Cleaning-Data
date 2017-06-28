@@ -26,7 +26,6 @@ colnames(subjectTest) = "subjectNumber"
 colnames(yTrain) = "activityCode"
 colnames(yTest) = "activityCode"
 
-# cCreate the final training set by merging yTrain, subjectTrain, and xTrain
 # 3. Use descriptive activity names to name the activities in the data set
 yTrain$activityName <- activityLabels$activityName[yTrain$activityCode]
 yTest$activityName <- activityLabels$activityName[yTest$activityCode]
@@ -34,28 +33,21 @@ yTest$activityName <- activityLabels$activityName[yTest$activityCode]
 finalTrain <- cbind(subjectTrain,activityName = yTrain$activityName,xTrain)
 finalTest <- cbind(subjectTest,activityName = yTest$activityName,xTest)
 
-# Read in the test data
-
-# Assign column names to the test data imported above
 
 
-# Create the final test set by merging the xTest, yTest and subjectTest data
 
 
 # Combine training and test data to create a final data set
 finalData <- rbind(finalTrain,finalTest)
 
-# Create a vector for the column names from the finalData, which will be used
-# to select the desired mean() & stddev() columns
+
 
 
 # 2. Extract only the measurements on the mean and standard deviation for each measurement. 
 
-# Create a logicalVector that contains TRUE values for the ID, mean() & stddev() columns and FALSE for others
 feat <- features[,2]
 colNumbers <- c(1,2,grep("mean[^F].*[)]$",feat), grep("std.*[)]$",feat) )
 
-# Subset finalData table based on the logicalVector to keep only desired columns
 finalDataSel <- finalData[,colNumbers]
 
 # 4. Appropriately label the data set with descriptive activity names. 
